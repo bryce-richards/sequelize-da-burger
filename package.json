@@ -1,0 +1,23 @@
+{
+  "name": "sequelize-da-burger",
+  "version": "1.0.0",
+  "description": "Sequelize-Da-Burger",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryce-richards/sequelize-da-burger.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bryce-richards/sequelize-da-burger/issues"
+  },
+  "homepage": "https://github.com/bryce-richards/sequelize-da-burger#readme",
+  "dependencies": {
+    "sequelize": "^3.29.0"
+  }
+}
