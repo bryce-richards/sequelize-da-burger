@@ -1,20 +1,18 @@
 module.exports = function(sequelize, DataTypes) {
     var Customer = sequelize.define("Customer", {
             customer_name: {
-                primaryKey: true,
                 type: DataTypes.STRING,
                 allowNull: false,
-                len: [1],
-                defaultValue: ""
+                len: [1]
             }
         }, {
-            paranoid: true
-        }, {
-            tableName: "customers"
-        }, {
+            paranoid: true,
+            tableName: "customers",
             classMethods: {
                 associate: function (models) {
-                    Customer.hasOne(models.Burger);
+                    Customer.hasOne(models.Burger, {
+                        onDelete: "cascade"
+                    });
                 }
             }
         }

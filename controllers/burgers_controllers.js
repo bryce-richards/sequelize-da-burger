@@ -10,7 +10,7 @@ router.get("/", function(req, res) {
 
 router.get("/burgers", function(req, res) {
     db.Burger.findAll({
-        include: [db.Customer]
+        include: [db.customer]
     }).then(function(allBurgers) {
         var hbsObject = {
             burgers: allBurgers
@@ -22,29 +22,26 @@ router.get("/burgers", function(req, res) {
 
 router.post("/burgers/create", function(req, res) {
     db.Burger.create({
-        burger_name: req.body.burgerName,
-        Customer: {}
-    }, {
-        include: [db.Customer]
+        burger_name: req.body.burgerName
     }).then(function() {
         res.redirect("/burgers");
     });
 });
 
 router.put("/burgers/update/:id", function(req, res) {
-    db.Burger.update({
-        devoured: req.body.devoured,
-        Customer: {
-            customer_name: req.body.customer
-        }
-    }, {
-        where: {
-            id: req.params.id
-        }
-    }, {
-        include: [db.Customer]
-    }).then(function() {
-        res.redirect("/burgers");
+    db.Customer.create({
+        customer_name: req.body.customer
+    }).then(function(newCustomer) {
+        db.Burger.update({
+            devoured: req.body.devoured,
+            CustomerId: newCustomer.id
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(function() {
+            res.redirect("/burgers");
+        });
     });
 });
 

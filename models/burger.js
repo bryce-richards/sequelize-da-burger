@@ -10,13 +10,15 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: false
         }
     }, {
-        paranoid: true
-    }, {
-        tableName: "burgers"
-    }, {
+        paranoid: true,
+        tableName: "burgers",
         classMethods: {
             associate: function(models) {
-                Burger.belongsTo(models.Customer);
+                Burger.belongsTo(models.Customer, {
+                    foreignKey: {
+                        allowNull: true
+                    }
+                });
             }
         }
     });
