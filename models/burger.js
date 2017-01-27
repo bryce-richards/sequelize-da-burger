@@ -3,10 +3,7 @@ module.exports = function(sequelize, DataTypes) {
         burger_name: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                min: 2,
-                max: 255
-            }
+            len: [1]
         },
         devoured: {
             type: DataTypes.BOOLEAN,
@@ -15,18 +12,15 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         tableName: "burgers"
     }, {
-            // We're saying that we want our Author to have Posts
-            classMethods: {
-                associate: function(models) {
-                    // An Author (foreignKey) is required or a Post can't be made
-                    Burger.belongsTo(models.Customer, {
-                        foreignKey: {
-                            allowNull: false
-                        }
-                    });
-                }
+        classMethods: {
+            associate: function(models) {
+                Burger.belongsTo(models.Customer, {
+                    foreignKey: {
+                        allowNull: false
+                    }
+                });
             }
         }
-    );
+    });
     return Burger;
 };
