@@ -15,7 +15,7 @@ router.get("/burgers", function(req, res) {
         var hbsObject = {
             burgers: allBurgers
         };
-        console.log("Handlebars Object");
+        console.log("Handlebars Object", hbsObject);
         res.render("index", hbsObject);
     });
 });
