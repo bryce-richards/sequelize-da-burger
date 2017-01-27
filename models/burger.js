@@ -10,14 +10,15 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: false
         }
     }, {
+        paranpid: true
+    }, {
         tableName: "burgers"
     }, {
         classMethods: {
             associate: function(models) {
                 Burger.belongsTo(models.Customer, {
-                    foreignKey: {
-                        allowNull: false
-                    }
+                    foreignKey: "fk_customer_name",
+                    targetKey: "customer_name"
                 });
             }
         }

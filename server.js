@@ -20,10 +20,10 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 var burgerRoutes = require("./controllers/burgers_controllers.js");
-var customerRoutes = require("./controllers/customer_controllers.js");
+// var customerRoutes = require("./controllers/customer_controllers.js");
 
 
-app.use(burgerRoutes, customerRoutes);
+app.use(burgerRoutes);
 
 db.sequelize.sync().then(function() {
     app.listen(PORT, function() {

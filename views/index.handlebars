@@ -26,10 +26,9 @@
                     {{#unless this.devoured}}
                         <li>
                             {{this.burger_name}}
-
                             <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-                                <input type="hidden" name="devoured" value="1">
-
+                                <input type="text" name="customer">
+                                <input type="hidden" name="devoured" value="1" >
                                 <button type="submit" class="btn btn-info btn-xs" id="devourBtn">Devour It! <span class="glyphicon glyphicon-cutlery"></span></button>
                             </form>
                             <form action="burgers/delete/{{this.id}}?_method=DELETE" method="POST">
@@ -47,11 +46,12 @@
             <div class="row center-block">
                 <form class="form-horizontal" action="burgers/create" method="POST">
                     <fieldset>
-                        <h2>Add a Burger!</h2>
+                        <h2>Order Up!</h2>
                         <div class="form-group">
                             <div class="col-lg-12">
-                                <input name="burgerName" type="text" class="form-control">
-                                <span class="help-block">Enter a burger you want to eat and click the "Submit" button.</span>
+                                <input name="customerName" type="text" placeholder="Customer Name">
+                                <input name="burgerName" type="text" placeholder="Burger Name" class="form-control">
+                                <span class="help-block">Enter your name and the burger you want to eat and click the "Submit" button.</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -72,7 +72,7 @@
                 {{#each burgers}}
                     {{#if this.devoured}}
                         <li>
-                            {{this.burger_name}}
+                            {{this.burger_name}} (devoured by {{this.customer_name}})
                             <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
                                 <input type="hidden" name="devoured" value="0">
 

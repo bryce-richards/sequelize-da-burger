@@ -6,15 +6,9 @@ module.exports = function(sequelize, DataTypes) {
                 len: [1]
             }
         }, {
-            tableName: "customers"
+            paranoid: true
         }, {
-            classMethods: {
-                associate: function(models) {
-                    Customer.hasMany(models.Post, {
-                        onDelete: "cascade"
-                    });
-                }
-            }
+            tableName: "customers"
         }
     );
     return Customer;

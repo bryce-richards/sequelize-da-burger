@@ -9,10 +9,13 @@ router.get("/", function(req, res) {
 });
 
 router.get("/burgers", function(req, res) {
-    db.Burger.findAll({}).then(function(allBurgers) {
+    db.Burger.findAll({
+        include: [db.Customer]
+    }).then(function(allBurgers) {
         var hbsObject = {
             burgers: allBurgers
         };
+        console.log("Handlebars Object", db.Customer);
         res.render("index", hbsObject);
     });
 });
@@ -21,6 +24,13 @@ router.post("/burgers/create", function(req, res) {
     db.Burger.create({
         burger_name: req.body.burgerName
     }).then(function() {
+        if (req.body.customerName) {
+            db.Customer.create({
+                customer_name: req.body.customerName
+            })
+        }
+    })
+    .then(function() {
         res.redirect("/burgers");
     });
 });
