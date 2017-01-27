@@ -10,12 +10,15 @@ router.get("/", function(req, res) {
 
 router.get("/burgers", function(req, res) {
     db.Burger.findAll({
-        include: [db.Customer]
+        include: [{
+            model: db.Customer,
+            attributes: ["customer_name"]
+        }]
     }).then(function(allBurgers) {
         var hbsObject = {
             burgers: allBurgers
         };
-        console.log("Handlebars Object", hbsObject);
+        console.log("Customer Object", hbsObject.Customer);
         res.render("index", hbsObject);
     });
 });
