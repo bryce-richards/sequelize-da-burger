@@ -15,33 +15,34 @@ router.get("/burgers", function(req, res) {
         var hbsObject = {
             burgers: allBurgers
         };
-        console.log("Handlebars Object", db.Customer);
+        console.log("Handlebars Object");
         res.render("index", hbsObject);
     });
 });
 
 router.post("/burgers/create", function(req, res) {
     db.Burger.create({
-        burger_name: req.body.burgerName
+        burger_name: req.body.burgerName,
+        Customer: {}
+    }, {
+        include: [db.Customer]
     }).then(function() {
-        if (req.body.customerName) {
-            db.Customer.create({
-                customer_name: req.body.customerName
-            })
-        }
-    })
-    .then(function() {
         res.redirect("/burgers");
     });
 });
 
 router.put("/burgers/update/:id", function(req, res) {
     db.Burger.update({
-        devoured: req.body.devoured
+        devoured: req.body.devoured,
+        Customer: {
+            customer_name: req.body.customer
+        }
     }, {
         where: {
             id: req.params.id
         }
+    }, {
+        include: [db.Customer]
     }).then(function() {
         res.redirect("/burgers");
     });
