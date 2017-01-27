@@ -17,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
                 Burger.belongsTo(models.Customer, {
                     foreignKey: {
                         allowNull: true
-                    }
+                    },
+                    constraints: false
                 });
             }
         }
