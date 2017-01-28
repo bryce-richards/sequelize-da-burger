@@ -6,6 +6,6 @@ h1, h2 {
     text-align: center;
 }
 
-form {
+form, input {
     margin-bottom: 5px;
 }

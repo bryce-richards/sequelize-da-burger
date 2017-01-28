@@ -31,11 +31,11 @@ router.post("/burgers/create", function(req, res) {
     });
 });
 
-router.put("/burgers/update/:id", function(req, res) {
+router.put("/burgers/update/devour/:id", function(req, res) {
     return db.Customer.create({
         customer_name: req.body.customer
     }).then(function(newCustomer) {
-        db.Burger.update({
+        return db.Burger.update({
             devoured: req.body.devoured,
             CustomerId: newCustomer.id
         }, {
@@ -43,14 +43,26 @@ router.put("/burgers/update/:id", function(req, res) {
                 id: req.params.id
             },
             include: [db.Customer]
-        }).then(function() {
-            res.redirect("/burgers");
         });
+    }).then(function() {
+        res.redirect("/burgers");
+    });
+});
+
+router.put("/burgers/update/return/:id", function(req, res) {
+    return db.Burger.update({
+        devoured: req.body.devoured
+    }, {
+        where: {
+            id: req.params.id
+        }
+    }).then(function() {
+        res.redirect("/burgers");
     });
 });
 
 router.delete("/burgers/delete/:id", function(req, res) {
-    db.Burger.destroy({
+    return db.Burger.destroy({
         where: {
             id: req.params.id
         }

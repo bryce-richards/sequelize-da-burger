@@ -26,8 +26,9 @@
                     {{#unless this.devoured}}
                         <li>
                             {{this.burger_name}}
-                            <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-                                <input type="text" name="customer">
+                            <form action="burgers/update/devour/{{this.id}}?_method=PUT" method="POST">
+                                <input type="text" name="customer" placeholder="Customer">
+                                <br>
                                 <input type="hidden" name="devoured" value="1" >
                                 <button type="submit" class="btn btn-info btn-xs" id="devourBtn">Devour It! <span class="glyphicon glyphicon-cutlery"></span></button>
                             </form>
@@ -72,7 +73,7 @@
                     {{#if this.devoured}}
                         <li>
                             {{this.burger_name}} (devoured by {{this.Customer.customer_name}})
-                            <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+                            <form action="burgers/update/return/{{this.id}}?_method=PUT" method="POST">
                                 <input type="hidden" name="devoured" value="0">
                                 <button type="submit" class="btn btn-warning btn-xs" id="devourBtn"><span class="glyphicon glyphicon-backward"></span> Send It Back!</button>
                             </form>
@@ -85,13 +86,6 @@
             </ul>
         </div>
         <!--END OF DEVOURED BURGERS-->
-
     </div>
     <!--END OF BURGERS-->
-
-    <br>
-    <div class="row">
-
-    </div>
-
 </main>
