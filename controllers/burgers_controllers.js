@@ -10,6 +10,9 @@ router.get("/", function(req, res) {
 
 router.get("/burgers", function(req, res) {
     db.Burger.findAll({
+        order: [
+            ["burger_name", "ASC"]
+        ],
         include: [{
             model: db.Customer,
             attributes: ["customer_name"]
@@ -18,13 +21,12 @@ router.get("/burgers", function(req, res) {
         var hbsObject = {
             burgers: allBurgers
         };
-        console.log("Customer Object", hbsObject.Customer);
         res.render("index", hbsObject);
     });
 });
 
 router.post("/burgers/create", function(req, res) {
-    db.Burger.create({
+    return db.Burger.create({
         burger_name: req.body.burgerName
     }).then(function() {
         res.redirect("/burgers");
